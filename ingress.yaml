@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: symfony-app-ingress
+  namespace: dev
+  annotations: 
+    spec.ingressClassName: nginx
+spec:
+  rules:
+  - host: symfony.app
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: symfony-app-service  
+            port:
+              number: 80 
