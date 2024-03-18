@@ -60,11 +60,11 @@ Deployment (symfony-app)
 1. **deployment.yaml**
 
     Kind: Defines this as a Deployment resource for managing application pods.
-    Replicas: Ensures one pod of your Symfony app is always running.
+    Replicas: Ensures one pod of Symfony app is always running.
     RollingUpdate Strategy: Gracefully updates pods during changes with minimal downtime (max 25% unavailable, max 25% surge).
     Container spec:
-        image: Your Docker image containing the Symfony application.
-        command: Executes your entrypoint script for container startup.
+        image: Docker image containing the Symfony application.
+        command: Executes entrypoint script for container startup.
         volumeMounts: Connects the container to persistent storage and config files.
 
 Volumes
@@ -95,7 +95,7 @@ Migration Job (symfony-app-migrations)
  **Small script to deploy everything: deployment.sh***
 
     Defines variables: Sets customizable values for image name, tag, and registry.
-    Builds/pushes Docker image (optional): Builds a Docker image and pushes it to a specified registry (if the section isn't commented out).
+    Builds/pushes Docker image (optional): Builds a Docker image and pushes it to a specified registry.
     Creates ConfigMaps: Establishes ConfigMaps from external configuration and script files.
     Deploys to Kubernetes: Applies Kubernetes deployment manifests to create resources within the cluster.
 
@@ -126,4 +126,3 @@ Key parts:
 How it works
 
 Kubernetes continuously monitors these metrics. If either metric exceeds the target, the HPA will tell the deployment to add pods (up to maxReplicas). If metrics fall below targets, it will decrease the number of pods (down to minReplicas).
-
